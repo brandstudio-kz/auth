@@ -66,11 +66,17 @@ class AuthServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/database/migrations/' => database_path('migrations')
         ], 'migrations');
+
+        $this->publishes([
+            __DIR__.'/routes/brandstudio/' => base_path('routes/brandstudio')
+        ], 'routes');
     }
 
     private function loadRoutes()
     {
-        $this->loadRoutesFrom(__DIR__.'/routes/auth.php');
+        $path = '/routes/brandstudio/auth.php';
+        $path = file_exists(base_path().$path) ? base_path().$path : __DIR__.$path;
+        $this->loadRoutesFrom($path);
     }
 
     private function loadMigrations()
