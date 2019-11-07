@@ -33,7 +33,7 @@ class AuthController extends BaseController
         return response()->json([
             'success' => true,
             'message' => trans('brandstudio::auth.success_registartion'),
-        ]);
+        ])->setStatusCode(201);
     }
 
     public function login(LoginRequest $request)
@@ -47,7 +47,7 @@ class AuthController extends BaseController
         return response()->json([
             'success' => true,
             'message' => trans('brandstudio::auth.success_reset_password'),
-        ]);
+        ])->setStatusCode(201);
     }
 
     public function updatePassword(UpdatePasswordRequest $request)
@@ -65,7 +65,7 @@ class AuthController extends BaseController
         return response()->json([
             'success' => true,
             'message' => trans('brandstudio::auth.success_update_login'),
-        ]);
+        ])->setStatusCode(201);
     }
 
     public function verify(VerifyTokenRequest $request)

@@ -24,7 +24,7 @@ class VerifyTokenRequest extends FormRequest
     public function rules()
     {
         return [
-            'login' => 'required',
+            'login' => config('brandstudio.auth.login_requirements'),
             'token' => 'required',
         ];
     }

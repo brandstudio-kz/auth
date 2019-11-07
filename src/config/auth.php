@@ -8,7 +8,7 @@ return [
     'auth_fields' => ['email', 'phone'],
 
     'password_requirements' => 'required|min:6',
-    'login_requirements' => 'required',
+    'login_requirements' => 'required|email_phone',
 
     'new_password_length' => 6,
     'verification_code_length' => 4,

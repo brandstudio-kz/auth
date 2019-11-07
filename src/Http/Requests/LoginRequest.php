@@ -27,7 +27,7 @@ class LoginRequest extends FormRequest
         // TODO: check if auth_field enabled
 
         return [
-            'login' => 'required',
+            'login' => config('brandstudio.auth.login_requirements'),
             'password' => 'required',
         ];
     }

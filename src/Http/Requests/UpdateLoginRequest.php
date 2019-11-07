@@ -24,8 +24,23 @@ class UpdateLoginRequest extends FormRequest
     public function rules()
     {
         return [
-            'login' => 'required',
+            'login' => $this->getLoginRules(),
             'password' => 'required',
         ];
     }
+
+    private function getLoginRules() : string
+    {
+        $rules = rtrim(config('brandstudio.auth.login_requirements'), '|');
+
+        $model = config('brandstudio.auth.model');
+        $users_table = (new $model)->getTable();
+
+        foreach(config('brandstudio.auth.auth_fields') as $field) {
+            $rules.="|unique:{$users_table},{$field}";
+        }
+
+        return $rules;
+    }
+
 }

@@ -4,6 +4,7 @@ namespace BrandStudio\Auth;
 use Illuminate\Support\ServiceProvider;
 use BrandStudio\Auth\AuthService;
 use BrandStudio\Auth\Http\Middleware\MbAuthenticate;
+use Illuminate\Support\Facades\Validator;
 use App;
 
 class AuthServiceProvider extends ServiceProvider
@@ -23,6 +24,7 @@ class AuthServiceProvider extends ServiceProvider
 
     public function boot()
     {
+        $this->loadValidations();
         $this->loadRoutes();
         $this->loadResources();
 
@@ -70,6 +72,20 @@ class AuthServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/routes/brandstudio/' => base_path('routes/brandstudio')
         ], 'routes');
+    }
+
+    private function loadValidations()
+    {
+        Validator::extend('email_phone', function ($attribute, $value, $parameters, $validator) {
+            if (in_array('phone', config('brandstudio.auth.auth_fields')) && preg_match('/7(\d){10}/', $value, $match)) {
+                return true;
+            }
+            return in_array('email', $parameters) && filter_var($value, FILTER_VALIDATE_EMAIL);
+        });
+
+        Validator::extend('phone', function ($attribute, $value, $parameters, $validator) {
+            return preg_match('/7(\d){10}/', $value, $match);
+        });
     }
 
     private function loadRoutes()
