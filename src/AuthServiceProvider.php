@@ -80,7 +80,7 @@ class AuthServiceProvider extends ServiceProvider
             if (in_array('phone', config('brandstudio.auth.auth_fields')) && preg_match('/7(\d){10}/', $value, $match)) {
                 return true;
             }
-            return in_array('email', $parameters) && filter_var($value, FILTER_VALIDATE_EMAIL);
+            return in_array('email', config('brandstudio.auth.auth_fields')) && filter_var($value, FILTER_VALIDATE_EMAIL);
         });
 
         Validator::extend('phone', function ($attribute, $value, $parameters, $validator) {
