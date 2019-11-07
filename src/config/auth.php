@@ -2,19 +2,18 @@
 
 return [
 
-    'model' => 'App\User',
+    'route_prefix' => 'auth',
 
+    'model' => 'App\User',
     'auth_fields' => ['email', 'phone'],
-    'password_field' => 'password',
 
     'password_requirements' => 'required|min:6',
     'login_requirements' => 'required',
 
+    'new_password_length' => 6,
     'verification_code_length' => 4,
     'verification_token_length' => 32,
-    'sms_service' => 'BrandStudio\\Sms\\SmsService',
-
     'verification_token_lifetime' => 24*60,// in minutes
 
-    'route_prefix' => 'auth',
+    'sms_service' => 'BrandStudio\\Sms\\SmsService',
 ];

@@ -10,7 +10,7 @@ class CheckUserPassword extends Base
 
     public static function execute(AuthService $authService, $user, string $password)
     {
-        if (!Hash::check($password, $user->{$authService->password_field})) {
+        if (!Hash::check($password, $user->password)) {
             abort(401);
         }
     }

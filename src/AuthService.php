@@ -8,17 +8,17 @@ class AuthService
     public $model;
     public $sms_service;
     public $auth_fields;
-    public $password_field;
     public $verification_code_length;
     public $verification_token_length;
     public $verification_token_lifetime;
+    public $new_password_length;
 
     public function __construct(array $config)
     {
         $this->model = $config['model'];
         $this->auth_fields = $config['auth_fields'];
         $this->sms_service = $config['sms_service'];
-        $this->password_field = $config['password_field'];
+        $this->new_password_length = $config['new_password_length'];
         $this->verification_code_length = $config['verification_code_length'];
         $this->verification_token_length = $config['verification_token_length'];
         $this->verification_token_lifetime = $config['verification_token_lifetime'];

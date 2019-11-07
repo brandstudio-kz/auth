@@ -5,6 +5,7 @@ namespace BrandStudio\Auth\Methods;
 use BrandStudio\Auth\AuthService;
 use BrandStudio\Auth\Models\VerificationToken;
 use BrandStudio\Auth\Jobs\DeleteVerificationTokenJob;
+use Illuminate\Support\Facades\Hash;
 
 class CreateVerificationToken extends Base
 {
@@ -15,10 +16,10 @@ class CreateVerificationToken extends Base
             'user_id' => $user_id,
             'login' => $login,
             'token' => $authService->generateToken($login),
-            'password' => $password,
+            'password' => $password ? Hash::make($password) : null,
         ]);
 
-        $authService->deliverVerificationToken($token);
+        $authService->deliverVerificationToken($token, $password);
         DeleteVerificationTokenJob::dispatch($token)->delay(now()->addMinutes($authService->verification_token_lifetime));
     }
 

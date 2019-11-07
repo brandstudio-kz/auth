@@ -24,7 +24,8 @@ class UpdatePasswordRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'password' => 'required',
+            'new_password' => config('brandstudio.auth.password_requirements'),
         ];
     }
 }

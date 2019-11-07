@@ -5,17 +5,20 @@ Route::group([
     'prefix' => config('brandstudio.auth.route_prefix'),
     'middleware' => [],
 ], function() {
-    Route::get('user', 'AuthController@getUser')->middleware('auth:api');
+    Route::group([
+        'middleware' => ['auth:api'],
+    ], function() {
+        Route::get('user', 'AuthController@getUser');
+        Route::put('user', 'AuthController@updateLogin');
+        Route::delete('user', 'AuthController@delete');
+    });
 
     Route::post('register', 'AuthController@register');
     Route::post('login', 'AuthController@login');
 
-    Route::prefix('password', function() {
-        Route::post('update', 'AuthController@resetPassword')->middleware('auth:api');
-        Route::post('reset', 'AuthController@resetPassword');
-    });
+    Route::post('password', 'AuthController@resetPassword');
+    Route::put('password', 'AuthController@resetPassword')->middleware('auth:api');
 
-    Route::put('update', 'AuthController@updateLogin')->middleware('auth:api');
     Route::get('verify', 'AuthController@verify')->name('verify');
     // TODO: refresh token
 });

@@ -24,7 +24,7 @@ class ResetPasswordRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'login' => 'required',
         ];
     }
 }

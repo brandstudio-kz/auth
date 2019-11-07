@@ -14,7 +14,6 @@ class Login extends Base
     {
         $user = $authService->getUser($login);
         $authService->checkUserPassword($user, $password);
-
         $client = DB::table('oauth_clients')->find(2);
 
         request()->request->add([

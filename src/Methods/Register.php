@@ -10,7 +10,7 @@ class Register extends Base
 
     public static function execute(AuthService $authService, string $login, string $password, array $data)
     {
-        $user = $authService->model::create(array_merge([$authService->password_field => Hash::make($password)], $data));
+        $user = $authService->model::create(array_merge(['password' => Hash::make($password)], $data));
         $authService->createVerificationToken($user->id, $login);
     }
 

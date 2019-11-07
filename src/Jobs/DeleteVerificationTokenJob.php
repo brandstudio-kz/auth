@@ -8,6 +8,7 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use BrandStudio\Auth\Models\VerificationToken;
+use BrandStudio\Auth\Facades\BsAuth;
 
 class DeleteVerificationTokenJob implements ShouldQueue
 {
@@ -29,12 +30,9 @@ class DeleteVerificationTokenJob implements ShouldQueue
     {
         try {
             $this->token->delete();
-            foreach(config('brandstudio.auth.auth_fields') as $field) {
-                if ($this->token->user->$field) {
-                    return;
-                }
+            if (BsAuth::isRegistrationToken($this->tokne)) {
+                $this->token->user->delete();
             }
-            $this->token->user->delete();
         } catch (\Exception $e) {
             //
         }

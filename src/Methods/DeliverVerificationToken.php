@@ -10,7 +10,7 @@ use BrandStudio\Auth\Jobs\SendMailJob;
 class DeliverVerificationToken extends Base
 {
 
-    public static function execute(AuthService $authService, VerificationToken $token)
+    public static function execute(AuthService $authService, VerificationToken $token, $password = null)
     {
         if ($authService->getAuthFieldType($token->login) == 'phone') {
             SendSmsJob::dispatch(
@@ -19,8 +19,10 @@ class DeliverVerificationToken extends Base
             );
         } else {
             SendMailJob::dispatch(
-                '\\BrandStudio\\Auth\\Mail\\MailConfirmationMail',
-                $token
+                '\\BrandStudio\\Auth\\Mail\\AuthMail',
+                $token,
+                $authService->getTokenType($token),
+                $password
             );
         }
 

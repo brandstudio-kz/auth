@@ -14,7 +14,7 @@ trait AuthUserTrait
     {
         return $this->where(function($query) use($username) {
             foreach(config('brandstudio.auth.auth_fields') as $field) {
-                $this->orWhere($field, $username);
+                $query->orWhere($field, $username);
             }
         })->first();
     }

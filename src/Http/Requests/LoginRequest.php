@@ -23,6 +23,9 @@ class LoginRequest extends FormRequest
      */
     public function rules()
     {
+
+        // TODO: check if auth_field enabled
+
         return [
             'login' => 'required',
             'password' => 'required',
