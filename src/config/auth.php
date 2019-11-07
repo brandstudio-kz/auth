@@ -15,5 +15,5 @@ return [
     'verification_token_length' => 32,
     'verification_token_lifetime' => 24*60,// in minutes
 
-    'sms_service' => 'BrandStudio\\Sms\\SmsService',
+    'sms_service' => 'BrandStudio\\Sms\\Facades\\Sms',
 ];
