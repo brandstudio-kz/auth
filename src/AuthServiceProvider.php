@@ -5,7 +5,6 @@ use Illuminate\Support\ServiceProvider;
 use BrandStudio\Auth\AuthService;
 use BrandStudio\Auth\Http\Middleware\MbAuthenticate;
 use Illuminate\Support\Facades\Validator;
-use App;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -97,7 +96,7 @@ class AuthServiceProvider extends ServiceProvider
 
     private function loadMigrations()
     {
-        $this->loadMigrationsFrom(__DIR__.'/path/to/migrations');
+        $this->loadMigrationsFrom(__DIR__.'/database/migrations');
     }
 
     private function loadResources()
