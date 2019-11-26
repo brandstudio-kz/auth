@@ -17,7 +17,7 @@ class AuthController extends BaseController
 
     public function getUser(Request $request)
     {
-        return response()->json($request->user());
+        return response()->json($request->user()->toAuthResponse());
     }
 
     public function register(RegisterRequest $request)
