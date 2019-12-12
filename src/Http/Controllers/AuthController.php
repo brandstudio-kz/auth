@@ -61,7 +61,7 @@ class AuthController extends BaseController
 
     public function updateLogin(UpdateLoginRequest $request)
     {
-        BsAuth::updateLogin($request->user(), $request->login, $request->password);
+        BsAuth::updateLogin($request->user(), $request->login);
         return response()->json([
             'success' => true,
             'message' => trans('brandstudio::auth.success_update_login'),

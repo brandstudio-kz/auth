@@ -17,7 +17,7 @@ Route::group([
     Route::post('login', 'AuthController@login');
 
     Route::post('password', 'AuthController@resetPassword');
-    Route::put('password', 'AuthController@resetPassword')->middleware('auth:api');
+    Route::put('password', 'AuthController@updatePassword')->middleware('auth:api');
 
     Route::get('verify', 'AuthController@verify')->name('verify');
     // TODO: refresh token

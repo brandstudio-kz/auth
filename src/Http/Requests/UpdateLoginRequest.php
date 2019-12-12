@@ -25,7 +25,7 @@ class UpdateLoginRequest extends FormRequest
     {
         return [
             'login' => $this->getLoginRules(),
-            'password' => 'required',
+            // 'password' => 'required',
         ];
     }
 
