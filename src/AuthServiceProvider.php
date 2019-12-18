@@ -69,7 +69,7 @@ class AuthServiceProvider extends ServiceProvider
         ], 'migrations');
 
         $this->publishes([
-            __DIR__.'/routes/brandstudio/' => base_path('routes/brandstudio')
+            __DIR__.'/routes//' => base_path('routes/brandstudio')
         ], 'routes');
     }
 
@@ -89,7 +89,7 @@ class AuthServiceProvider extends ServiceProvider
 
     private function loadRoutes()
     {
-        $path = '/routes/brandstudio/auth.php';
+        $path = '/routes/auth.php';
         $path = file_exists(base_path().$path) ? base_path().$path : __DIR__.$path;
         $this->loadRoutesFrom($path);
     }
