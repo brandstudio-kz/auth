@@ -30,7 +30,7 @@ class DeleteVerificationTokenJob implements ShouldQueue
     {
         try {
             $this->token->delete();
-            if (BsAuth::isRegistrationToken($this->tokne)) {
+            if (BsAuth::isRegistrationToken($this->token)) {
                 $this->token->user->delete();
             }
         } catch (\Exception $e) {
