@@ -7,19 +7,20 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use BrandStudio\Auth\Models\VerificationToken;
 
 class SendSmsJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     protected $service;
-    protected $token;
+    protected $phone;
+    protected $text;
 
-    public function __construct(string $service, VerificationToken $token)
+    public function __construct(string $service, string $phone, string $text)
     {
         $this->service = $service;
-        $this->token = $token;
+        $this->phone = $phone;
+        $this->text = $text;
     }
 
     /**
@@ -29,6 +30,6 @@ class SendSmsJob implements ShouldQueue
      */
     public function handle()
     {
-        $this->service::send($this->token->login, trans('brandstudio::auth.your_code', ['code' => $this->token->token]));
+        $this->service::send($this->phone, $this->text);
     }
 }
