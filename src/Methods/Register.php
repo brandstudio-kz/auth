@@ -12,6 +12,7 @@ class Register extends Base
     {
         $user = $authService->model::create(array_merge(['password' => Hash::make($password)], $data));
         $authService->createVerificationToken($user->id, $login);
+        return $user;
     }
 
 }

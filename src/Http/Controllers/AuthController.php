@@ -29,7 +29,12 @@ class AuthController extends BaseController
                 config('brandstudio.auth.auth_fields')
             )
         );
-        BsAuth::register($request->login, $request->password, $data);
+        $user = BsAuth::register($request->login, $request->password, $data);
+        foreach(config('brandstudio.auth.auth_fields') as $field) {
+            if ($request->{$field}) {
+                BsAuth::updateLogin($user, $request->{$field});
+            }
+        }
         return response()->json([
             'success' => true,
             'message' => trans('brandstudio::auth.success_registartion'),
