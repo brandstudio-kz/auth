@@ -15,7 +15,8 @@ class DeliverVerificationToken extends Base
         if ($authService->getAuthFieldType($token->login) == 'phone') {
             SendSmsJob::dispatch(
                 $authService->sms_service,
-                $token
+                $token->login,
+                trans('brandstudio::auth.your_code', ['code' => $token->token])
             );
         } else {
             SendMailJob::dispatch(
