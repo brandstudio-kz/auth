@@ -10,7 +10,7 @@ class UpdatePassword extends Base
 
     public static function execute(AuthService $authService, $user, string $password, string $new_password)
     {
-        // $authService->checkUserPassword($user, $password);
+        $authService->checkUserPassword($user, $password);
         $user->update([
             'password' => Hash::make($new_password),
         ]);
