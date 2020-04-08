@@ -18,7 +18,7 @@ class ResetPassword extends Base
             $user->update([
                 'password' => Hash::make($password),
             ]);
-            SendSmsJob::dispatch($login, trans('brandstudio::auth.your_password', ['password' => $password]));
+            SendSmsJob::dispatch($authService->sms_service, $login, trans('brandstudio::auth.your_password', ['password' => $password]));
 
         } else {
             $authService->createVerificationToken($user->id, $login, $authService->generatePassword());
