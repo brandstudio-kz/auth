@@ -76,10 +76,13 @@ class AuthController extends BaseController
     public function verify(VerifyTokenRequest $request)
     {
         BsAuth::verify($request->login, $request->token);
-        return response()->json([
-            'success' => true,
-            'message' => trans('brandstudio::auth.success_verification'),
-        ]);
+        if ($request->expectsJson()) {
+            return response()->json([
+                'success' => true,
+                'message' => trans('brandstudio::auth.success_verification'),
+            ]);
+        }
+        return redirect(config('brandstudio.auth.redirect_url'));
     }
 
     public function delete(Request $request)
