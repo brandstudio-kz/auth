@@ -2,8 +2,6 @@
 
 namespace BrandStudio\Auth\Http\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
-
 class UpdateLoginRequest extends FormRequest
 {
     /**

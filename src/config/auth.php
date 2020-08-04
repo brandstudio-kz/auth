@@ -1,9 +1,9 @@
 <?php
 
 return [
-    
+
     'redirect_url' => '',
-    
+
     'route_prefix' => 'auth',
     'route_middlewares' => [],
 
