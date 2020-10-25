@@ -24,7 +24,11 @@ class AuthServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->loadValidations();
-        $this->loadRoutes();
+
+        if (config('brandstudio.auth.setup_routes')) {
+            $this->loadRoutes();
+        }
+
         $this->loadResources();
 
         if ($this->app->runningInConsole()) {

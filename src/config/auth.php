@@ -4,6 +4,7 @@ return [
 
     'redirect_url' => '',
 
+    'setup_routes' => true,
     'route_prefix' => 'auth',
     'route_middlewares' => [],
 
